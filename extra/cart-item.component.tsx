@@ -3,6 +3,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import { Button, ListItem, ListItemProps, Text } from '@ui-kitten/components';
 import { CloseIcon, MinusIcon, PlusIcon } from './icons';
 import { Product } from './data';
+import '../global';
 
 export type CartItemProps = ListItemProps & {
   index: number;
@@ -32,7 +33,8 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
       product.price,
       product.amount - 1,
     );
-
+    global.config.amount = updatedProduct.amount;
+    global.config.price = updatedProduct.price;
     onProductChange(updatedProduct, index);
   };
 
@@ -45,7 +47,8 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
       product.price,
       product.amount + 1,
     );
-
+    global.config.amount = updatedProduct.amount;
+    global.config.price = updatedProduct.price;
     onProductChange(updatedProduct, index);
   };
 
@@ -95,7 +98,7 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
         style={[styles.iconButton, styles.removeButton]}
         appearance='ghost'
         status='basic'
-        icon={CloseIcon}
+        accessoryLeft={CloseIcon}
         onPress={onRemoveButtonPress}
       />
     </ListItem>

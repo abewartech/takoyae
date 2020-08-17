@@ -3,56 +3,96 @@ import { ImageSourcePropType } from 'react-native';
 export class Product {
 
   constructor(readonly title: string,
-              readonly category: string,
-              readonly image: ImageSourcePropType,
-              readonly price: number,
-              readonly amount: number) {
+    readonly category: string,
+    readonly image: ImageSourcePropType,
+    readonly price: number,
+    readonly amount: number) {
   }
 
   get formattedPrice(): string {
-    return `$${this.price}`;
+    return `Rp. ${this.price}`;
   }
 
   get totalPrice(): number {
     return this.price * this.amount;
   }
 
-  static pinkChair(): Product {
+  static makanan1(): Product {
     return new Product(
-      'Pink Chair',
-      'Furniture',
-      require('./assets/images/image-product-1.png'),
-      130,
+      'Ramen',
+      'Makanan',
+      require('./assets/images/1.jpeg'),
+      30000,
       1,
     );
   }
 
-  static whiteChair(): Product {
+  static makanan2(): Product {
     return new Product(
-      'White Chair',
-      'Furniture',
-      require('./assets/images/image-product-2.jpg'),
-      150,
+      'Spicy Ramen',
+      'Makanan',
+      require('./assets/images/2.jpeg'),
+      30000,
       1,
     );
   }
 
-  static woodChair(): Product {
+  static makanan3(): Product {
     return new Product(
-      'Wood Chair',
-      'Furniture',
-      require('./assets/images/image-product-1.png'),
-      125,
+      'Beef Ramen',
+      'Makanan',
+      require('./assets/images/3.jpeg'),
+      30000,
       1,
     );
   }
 
-  static blackLamp(): Product {
+  static makanan4(): Product {
     return new Product(
-      'Black Lamp',
-      'Lighting',
-      require('./assets/images/image-product-3.jpg'),
-      80,
+      'Miso Ramen',
+      'Makanan',
+      require('./assets/images/4.jpeg'),
+      30000,
+      1,
+    );
+  }
+
+  static makanan5(): Product {
+    return new Product(
+      'Beef Udon',
+      'Makanan',
+      require('./assets/images/5.jpeg'),
+      30000,
+      1,
+    );
+  }
+
+  static makanan6(): Product {
+    return new Product(
+      'Takoyaki',
+      'Makanan',
+      require('./assets/images/6.jpeg'),
+      15000,
+      1,
+    );
+  }
+
+  static makanan7(): Product {
+    return new Product(
+      'Okonomiyaki',
+      'Makanan',
+      require('./assets/images/7.jpeg'),
+      20000,
+      1,
+    );
+  }
+
+  static makanan8(): Product {
+    return new Product(
+      'Kare Rice',
+      'Makanan',
+      require('./assets/images/8.jpeg'),
+      32000,
       1,
     );
   }

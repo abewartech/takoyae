@@ -19,38 +19,54 @@ import {
   Text,
 } from '@ui-kitten/components';
 import {Product} from './data';
+import {ProductM} from './dataM';
+import './global';
 
 const products: Product[] = [
-  Product.pinkChair(),
-  Product.blackLamp(),
-  Product.whiteChair(),
-  Product.woodChair(),
-  Product.pinkChair(),
-  Product.blackLamp(),
-  Product.whiteChair(),
-  Product.woodChair(),
+  Product.makanan1(),
+  Product.makanan2(),
+  Product.makanan3(),
+  Product.makanan4(),
+  Product.makanan5(),
+  Product.makanan6(),
+  Product.makanan7(),
+  Product.makanan8(),
 ];
 
+const productsM: ProductM[] = [ProductM.minuman1()];
+
 export const HomeScreen = ({navigation, route}) => {
-  const navigateDetails = () => {
+  const navigateDetails = item => {
+    global.config.idProd = item;
     navigation.navigate('Details');
   };
+
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   const displayProducts: Product[] = products.filter(
     product => product.category === route.name,
   );
 
+  const displayProductsM: ProductM[] = productsM.filter(
+    productM => productM.category === route.name,
+  );
+
   const MenuIcon = props => <Icon {...props} name="menu-outline" />;
 
-  const MakanIcon = props => <Icon {...props} name="person-outline" />;
+  const MakanIcon = props => <Icon {...props} name="pie-chart-outline" />;
 
   const CartIcon = props => <Icon {...props} name="shopping-cart" />;
 
-  const MinumIcon = props => <Icon {...props} name="bell-outline" />;
+  const MinumIcon = props => <Icon {...props} name="droplet-outline" />;
 
-  const renderBackAction = () => <TopNavigationAction icon={MenuIcon} />;
+  const toggleModal = (): void => {
+    navigation.navigate('Laporan');
+  };
 
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const renderBackAction = () => (
+    <TopNavigationAction icon={MenuIcon} onPress={toggleModal} />
+  );
 
   const renderItemFooter = (
     info: ListRenderItemInfo<Product>,
@@ -61,7 +77,7 @@ export const HomeScreen = ({navigation, route}) => {
         style={styles.iconButton}
         size="small"
         accessoryLeft={CartIcon}
-        onPress={navigateDetails}
+        onPress={navigateDetails(info.item.title)}
       />
     </Layout>
   );
@@ -79,7 +95,7 @@ export const HomeScreen = ({navigation, route}) => {
       style={styles.productItem}
       header={() => renderItemHeader(info)}
       footer={() => renderItemFooter(info)}
-      onPress={navigateDetails}>
+      onPress={navigateDetails(info.item.title)}>
       <Text category="s1">{info.item.title}</Text>
       <Text appearance="hint" category="c1">
         {info.item.category}
@@ -95,7 +111,6 @@ export const HomeScreen = ({navigation, route}) => {
         accessoryLeft={renderBackAction}
       />
       <Divider />
-
       <TabView
         style={styles.tabView}
         tabBarStyle={styles.tabBar}
@@ -112,7 +127,7 @@ export const HomeScreen = ({navigation, route}) => {
         <Tab title="Minuman" icon={MinumIcon}>
           <List
             contentContainerStyle={styles.productList}
-            data={(displayProducts.length && displayProducts) || products}
+            data={(displayProductsM.length && displayProductsM) || productsM}
             numColumns={2}
             renderItem={renderProductItem}
           />
@@ -153,5 +168,28 @@ const styles = StyleSheet.create({
   },
   iconButton: {
     paddingHorizontal: 0,
+  },
+  modalReportContainer: {
+    width: 20,
+    height: 30,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    borderRadius: 8,
+    paddingTop: 15,
+  },
+  modalBtn: {
+    width: 20,
+    marginVertical: 10,
+  },
+  mainSection: {width: 20},
+  section: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 30,
+  },
+  sectionReport: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
