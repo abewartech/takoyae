@@ -26,7 +26,7 @@ const BackIcon = props => <Icon {...props} name="arrow-back" />;
 
 export const DetailsScreen = ({navigation}) => {
   const initialProducts: Product[] = [
-    global.config.idProd === 'Ramen'
+    global.config.idProd === 'Shoyu Ramen'
       ? Product.makanan1()
       : global.config.idProd === 'Spicy Ramen'
       ? Product.makanan2()

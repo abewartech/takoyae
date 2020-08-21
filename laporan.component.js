@@ -123,11 +123,11 @@ export const LaporanScreen = ({navigation}) => {
           <tbody>
             <tr style="text-align: center;">
               <td>1</td>
-              <td>Abe</td>
-              <td></td>
-              <td>2 Jam</td>
-              <td></td>
-              <td>2 Jam</td>
+              <td>16-07-2020</td>
+              <td>Ramen</td>
+              <td>2</td>
+              <td>30000</td>
+              <td>60000</td>
             </tr>
           </tbody>
         </table>

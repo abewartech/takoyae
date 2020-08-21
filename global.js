@@ -1,5 +1,5 @@
 module.exports = global.config = {
-    idProd: 'Ramen',
-    amount: 1,
-    price: 15000
+  idProd: 'Shoyu Ramen',
+  amount: 1,
+  price: 15000,
 };

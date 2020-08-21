@@ -1,13 +1,13 @@
-import { ImageSourcePropType } from 'react-native';
+import {ImageSourcePropType} from 'react-native';
 
 export class Product {
-
-  constructor(readonly title: string,
+  constructor(
+    readonly title: string,
     readonly category: string,
     readonly image: ImageSourcePropType,
     readonly price: number,
-    readonly amount: number) {
-  }
+    readonly amount: number,
+  ) {}
 
   get formattedPrice(): string {
     return `Rp. ${this.price}`;
@@ -19,7 +19,7 @@ export class Product {
 
   static makanan1(): Product {
     return new Product(
-      'Ramen',
+      'Shoyu Ramen',
       'Makanan',
       require('./assets/images/1.jpeg'),
       30000,
