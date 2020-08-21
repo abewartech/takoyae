@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import {
   SafeAreaView,
   ImageBackground,
@@ -21,6 +21,7 @@ import {
 import {Product} from './data';
 import {ProductM} from './dataM';
 import './global';
+let SQLite = require('react-native-sqlite-storage');
 
 const products: Product[] = [
   Product.makanan1(),
@@ -33,16 +34,33 @@ const products: Product[] = [
   Product.makanan8(),
 ];
 
-const productsM: ProductM[] = [ProductM.minuman1()];
+const productsM: ProductM[] = [
+  ProductM.minuman1(),
+  ProductM.minuman2(),
+  ProductM.minuman3()
+];
 
 export const HomeScreen = ({navigation, route}) => {
-  const navigateDetails = item => {
-    global.config.idProd = item;
-    navigation.navigate('Details');
-  };
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [record, setRecord] = React.useState([]);
   const [modalVisible, setModalVisible] = React.useState(false);
+
+  const navigateDetails = item => {
+    saveItem(item)
+  };
+
+  const saveItem = (item) => {
+    var db = SQLite.openDatabase({
+      name: 'beli.db',
+      createFromLocation: '~takoyae.db',
+      location: 'Library',
+    });
+    db.transaction(tx => {
+        tx.executeSql('insert into beli (name,price,amount,total) values (?,?,?,?);', [item.title,item.price,item.amount,item.price*item.amount]);    
+      }, null, navigation.navigate('Details')
+    )
+  }
 
   const displayProducts: Product[] = products.filter(
     product => product.category === route.name,
@@ -77,7 +95,7 @@ export const HomeScreen = ({navigation, route}) => {
         style={styles.iconButton}
         size="small"
         accessoryLeft={CartIcon}
-        onPress={navigateDetails(info.item.title)}
+        onPress={() => {navigateDetails(info.item)}}
       />
     </Layout>
   );
@@ -95,7 +113,7 @@ export const HomeScreen = ({navigation, route}) => {
       style={styles.productItem}
       header={() => renderItemHeader(info)}
       footer={() => renderItemFooter(info)}
-      onPress={navigateDetails(info.item.title)}>
+      onPress={() => {navigateDetails(info.item)}}>
       <Text category="s1">{info.item.title}</Text>
       <Text appearance="hint" category="c1">
         {info.item.category}

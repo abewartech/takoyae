@@ -4,6 +4,7 @@ import { Button, ListItem, ListItemProps, Text } from '@ui-kitten/components';
 import { CloseIcon, MinusIcon, PlusIcon } from './icons';
 import { Product } from './data';
 import '../global';
+let SQLite = require('react-native-sqlite-storage');
 
 export type CartItemProps = ListItemProps & {
   index: number;
@@ -33,9 +34,16 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
       product.price,
       product.amount - 1,
     );
-    global.config.amount = updatedProduct.amount;
-    global.config.price = updatedProduct.price;
-    onProductChange(updatedProduct, index);
+    var db = SQLite.openDatabase({
+      name: 'beli.db',
+      createFromLocation: '~takoyae.db',
+      location: 'Library',
+    });
+    db.transaction(
+      tx => {
+        tx.executeSql(`update beli set amount = ? where name = ?`, [updatedProduct.amount, updatedProduct.title]);
+      }, null, onProductChange(updatedProduct, index)
+    )
   };
 
   const onPlusButtonPress = (): void => {
@@ -47,9 +55,16 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
       product.price,
       product.amount + 1,
     );
-    global.config.amount = updatedProduct.amount;
-    global.config.price = updatedProduct.price;
-    onProductChange(updatedProduct, index);
+    var db = SQLite.openDatabase({
+      name: 'beli.db',
+      createFromLocation: '~takoyae.db',
+      location: 'Library',
+    });
+    db.transaction(
+      tx => {
+        tx.executeSql(`update beli set amount = ? where name = ?`, [updatedProduct.amount, updatedProduct.title]);
+      }, null, onProductChange(updatedProduct, index)
+    )``
   };
 
   return (

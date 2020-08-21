@@ -19,10 +19,30 @@ export class ProductM {
 
   static minuman1(): ProductM {
     return new ProductM(
-      'Air Mineral',
+      'Ocha',
       'Minuman',
       require('./assets/images/aer.jpg'),
       5000,
+      1,
+    );
+  }
+
+  static minuman2(): ProductM {
+    return new ProductM(
+      'Air Mineral',
+      'Minuman',
+      require('./assets/images/aer.jpg'),
+      4000,
+      1,
+    );
+  }
+  
+  static minuman3(): ProductM {
+    return new ProductM(
+      'Coca-Cola',
+      'Minuman',
+      require('./assets/images/aer.jpg'),
+      7000,
       1,
     );
   }
