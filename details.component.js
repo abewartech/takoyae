@@ -23,11 +23,9 @@ import moment from 'moment';
 import './global';
 let SQLite = require('react-native-sqlite-storage');
 
-
 const BackIcon = props => <Icon {...props} name="arrow-back" />;
 
 export const DetailsScreen = ({navigation}) => {
-  
   const [products, setProducts] = React.useState([]);
   const [dataBeli, setDataBeli] = React.useState([]);
   const [total, setTotal] = React.useState(0);
@@ -52,47 +50,37 @@ export const DetailsScreen = ({navigation}) => {
               <td>${row.name}</td>
               <td>${row.price}</td>
             </tr>`,
-          )
-          totalFix += row.price*row.amount
+          );
+          totalFix += row.price * row.amount;
           if (row.name === 'Shoyu Ramen') {
-            data.push(Product.makanan1())
-          }
-          else  if (row.name === 'Spicy Ramen') {
-            data.push(Product.makanan2())
-          }
-          else if (row.name === 'Beef Ramen') {
-            data.push(Product.makanan3())
-          }
-          else if (row.name === 'Miso Ramen') {
-            data.push(Product.makanan4())
-          }
-          else if (row.name === 'Beef Udon') {
-            data.push(Product.makanan5())
-          }
-          else if (row.name === 'Takoyaki') {
-            data.push(Product.makanan6())
-          }
-          else if (row.name === 'Okonomiyaki') {
-            data.push(Product.makanan7())
-          }
-          else if (row.name === 'Kare Rice') {
-            data.push(Product.makanan8())
-          }
-          else if (row.name === 'Ocha') {
-            data.push(Product.minuman1())
-          }
-          else if (row.name === 'Air Mineral') {
-            data.push(Product.minuman2())
-          }
-          else {
-            data.push(Product.minuman3())
+            data.push(Product.makanan1());
+          } else if (row.name === 'Spicy Ramen') {
+            data.push(Product.makanan2());
+          } else if (row.name === 'Beef Ramen') {
+            data.push(Product.makanan3());
+          } else if (row.name === 'Miso Ramen') {
+            data.push(Product.makanan4());
+          } else if (row.name === 'Beef Udon') {
+            data.push(Product.makanan5());
+          } else if (row.name === 'Takoyaki') {
+            data.push(Product.makanan6());
+          } else if (row.name === 'Okonomiyaki') {
+            data.push(Product.makanan7());
+          } else if (row.name === 'Kare Rice') {
+            data.push(Product.makanan8());
+          } else if (row.name === 'Ocha') {
+            data.push(Product.minuman1());
+          } else if (row.name === 'Air Mineral') {
+            data.push(Product.minuman2());
+          } else {
+            data.push(Product.minuman3());
           }
         }
-        setProducts(data)
-        setDataBeli(dataFix)
-        setTotal(totalFix)
+        setProducts(data);
+        setDataBeli(dataFix);
+        setTotal(totalFix);
       });
-    }); 
+    });
   }, []);
 
   const navigateBack = () => {
@@ -124,8 +112,10 @@ export const DetailsScreen = ({navigation}) => {
     db.transaction(
       tx => {
         tx.executeSql(`delete from beli where name = ?;`, [product.title]);
-      }, null, products.splice(index, 1)
-    )
+      },
+      null,
+      products.splice(index, 1),
+    );
     setProducts([...products]);
   };
 
@@ -174,9 +164,9 @@ export const DetailsScreen = ({navigation}) => {
           </p>
           <table style="margin: 0px auto;">
             <tr>
-              <td>${Math.floor( Math.random() * 10, )}</td>
+              <td>${Math.floor(Math.random() * 10)}</td>
               <td colspan="2">
-                ${moment(new Date()).format( 'DD MMMM YYYY ~ HH:mm', )}
+                ${moment(new Date()).format('DD MMMM YYYY ~ HH:mm')}
               </td>
             </tr>
             ${dataBeli}
@@ -198,9 +188,31 @@ export const DetailsScreen = ({navigation}) => {
     </html>
     `,
     });
+    var db = SQLite.openDatabase({
+      name: 'penjualan.db',
+      createFromLocation: '~takoyae.db',
+      location: 'Library',
+    });
+    products.map(item => {
+      db.transaction(
+        tx => {
+          tx.executeSql(
+            'insert into penjualan (name,tgl,quantity,harga,total) values (?,?,?,?,?);',
+            [
+              item.title,
+              moment().format('YYYY-MM-DD'),
+              item.amount,
+              item.price,
+              item.price * item.amount,
+            ],
+          );
+        },
+        null,
+        null,
+      );
+    });
   }
-  
-  
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <TopNavigation

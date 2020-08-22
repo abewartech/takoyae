@@ -48,10 +48,11 @@ export const LaporanScreen = ({navigation}) => {
         for (var i = 0; i < len; i++) {
           var row = results.rows.item(i);
           data.push(row);
+          console.log(row);
         }
-        setRecord(data)
+        setRecord(data);
       });
-    }); 
+    });
   }, []);
 
   const BackAction = () => (
