@@ -14,6 +14,7 @@ import {
   TopNavigationAction,
   List,
   Button,
+  Spinner,
 } from '@ui-kitten/components';
 import {Product} from './data';
 import {ProductM} from './dataM';
@@ -28,9 +29,11 @@ const BackIcon = props => <Icon {...props} name="arrow-back" />;
 export const DetailsScreen = ({navigation}) => {
   const [products, setProducts] = React.useState([]);
   const [dataBeli, setDataBeli] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   const [total, setTotal] = React.useState(0);
 
   useEffect(() => {
+    setLoading(true)
     var db = SQLite.openDatabase({
       name: 'beli.db',
       createFromLocation: '~takoyae.db',
@@ -79,9 +82,10 @@ export const DetailsScreen = ({navigation}) => {
         setProducts(data);
         setDataBeli(dataFix);
         setTotal(totalFix);
+        setLoading(false)
       });
     });
-  }, []);
+  },[]);
 
   const navigateBack = () => {
     navigation.goBack();
@@ -208,9 +212,24 @@ export const DetailsScreen = ({navigation}) => {
           );
         },
         null,
-        null,
+        deleteAll(),
       );
     });
+  }
+
+  const deleteAll = () => {
+    var db = SQLite.openDatabase({
+      name: 'beli.db',
+      createFromLocation: '~takoyae.db',
+      location: 'Library',
+    });
+    db.transaction(
+      tx => {
+        tx.executeSql(`delete from beli;`);
+      },
+      null,
+      null,
+    );
   }
 
   return (
@@ -222,11 +241,14 @@ export const DetailsScreen = ({navigation}) => {
       />
       <Divider />
       <Layout style={styles.container} level="2">
-        <List
-          data={products}
-          renderItem={renderProductItem}
-          ListFooterComponent={renderFooter}
-        />
+        {loading ? 
+(<Spinner  />)
+        : (
+          <List
+            data={products}
+            renderItem={renderProductItem}
+            ListFooterComponent={renderFooter}
+          />)}
         <Button
           style={styles.checkoutButton}
           size="giant"
@@ -259,4 +281,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginVertical: 24,
   },
+  spinner:  {
+    marginVertical: 10,
+  }
 });

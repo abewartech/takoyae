@@ -64,7 +64,8 @@ export const CartItem = (props: CartItemProps): React.ReactElement => {
       tx => {
         tx.executeSql(`update beli set amount = ? where name = ?`, [updatedProduct.amount, updatedProduct.title]);
       }, null, onProductChange(updatedProduct, index)
-    )``
+    )
+    this.forceUpdate()
   };
 
   return (
