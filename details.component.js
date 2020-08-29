@@ -69,11 +69,11 @@ export const DetailsScreen = ({navigation}) => {
           } else if (row.name === 'Kare Rice') {
             data.push(Product.makanan8());
           } else if (row.name === 'Ocha') {
-            data.push(Product.minuman1());
+            data.push(ProductM.minuman1());
           } else if (row.name === 'Air Mineral') {
-            data.push(Product.minuman2());
+            data.push(ProductM.minuman2());
           } else {
-            data.push(Product.minuman3());
+            data.push(ProductM.minuman3());
           }
         }
         setProducts(data);

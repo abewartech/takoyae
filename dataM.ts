@@ -21,7 +21,7 @@ export class ProductM {
     return new ProductM(
       'Ocha',
       'Minuman',
-      require('./assets/images/aer.jpg'),
+      require('./assets/images/ocha.jpg'),
       5000,
       1,
     );
@@ -36,12 +36,12 @@ export class ProductM {
       1,
     );
   }
-  
+
   static minuman3(): ProductM {
     return new ProductM(
       'Coca-Cola',
       'Minuman',
-      require('./assets/images/aer.jpg'),
+      require('./assets/images/coca.jpg'),
       7000,
       1,
     );

@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ImageBackground,
@@ -37,30 +37,35 @@ const products: Product[] = [
 const productsM: ProductM[] = [
   ProductM.minuman1(),
   ProductM.minuman2(),
-  ProductM.minuman3()
+  ProductM.minuman3(),
 ];
 
 export const HomeScreen = ({navigation, route}) => {
-
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [record, setRecord] = React.useState([]);
   const [modalVisible, setModalVisible] = React.useState(false);
 
   const navigateDetails = item => {
-    saveItem(item)
+    saveItem(item);
   };
 
-  const saveItem = (item) => {
+  const saveItem = item => {
     var db = SQLite.openDatabase({
       name: 'beli.db',
       createFromLocation: '~takoyae.db',
       location: 'Library',
     });
-    db.transaction(tx => {
-        tx.executeSql('insert into beli (name,price,amount,total) values (?,?,?,?);', [item.title,item.price,item.amount,item.price*item.amount]);    
-      }, null, navigation.navigate('Details')
-    )
-  }
+    db.transaction(
+      tx => {
+        tx.executeSql(
+          'insert into beli (name,price,amount,total) values (?,?,?,?);',
+          [item.title, item.price, item.amount, item.price * item.amount],
+        );
+      },
+      null,
+      navigation.navigate('Details'),
+    );
+  };
 
   const displayProducts: Product[] = products.filter(
     product => product.category === route.name,
@@ -95,13 +100,37 @@ export const HomeScreen = ({navigation, route}) => {
         style={styles.iconButton}
         size="small"
         accessoryLeft={CartIcon}
-        onPress={() => {navigateDetails(info.item)}}
+        onPress={() => {
+          navigateDetails(info.item);
+        }}
+      />
+    </Layout>
+  );
+
+  const renderItemFooterM = (
+    info: ListRenderItemInfo<ProductM>,
+  ): React.ReactElement => (
+    <Layout style={styles.itemFooter}>
+      <Text category="s1">{info.item.formattedPrice}</Text>
+      <Button
+        style={styles.iconButton}
+        size="small"
+        accessoryLeft={CartIcon}
+        onPress={() => {
+          navigateDetails(info.item);
+        }}
       />
     </Layout>
   );
 
   const renderItemHeader = (
     info: ListRenderItemInfo<Product>,
+  ): React.ReactElement => (
+    <ImageBackground style={styles.itemHeader} source={info.item.image} />
+  );
+
+  const renderItemHeaderM = (
+    info: ListRenderItemInfo<ProductM>,
   ): React.ReactElement => (
     <ImageBackground style={styles.itemHeader} source={info.item.image} />
   );
@@ -113,7 +142,26 @@ export const HomeScreen = ({navigation, route}) => {
       style={styles.productItem}
       header={() => renderItemHeader(info)}
       footer={() => renderItemFooter(info)}
-      onPress={() => {navigateDetails(info.item)}}>
+      onPress={() => {
+        navigateDetails(info.item);
+      }}>
+      <Text category="s1">{info.item.title}</Text>
+      <Text appearance="hint" category="c1">
+        {info.item.category}
+      </Text>
+    </Card>
+  );
+
+  const renderProductItemM = (
+    info: ListRenderItemInfo<ProductM>,
+  ): React.ReactElement => (
+    <Card
+      style={styles.productItem}
+      header={() => renderItemHeaderM(info)}
+      footer={() => renderItemFooterM(info)}
+      onPress={() => {
+        navigateDetails(info.item);
+      }}>
       <Text category="s1">{info.item.title}</Text>
       <Text appearance="hint" category="c1">
         {info.item.category}
@@ -147,7 +195,7 @@ export const HomeScreen = ({navigation, route}) => {
             contentContainerStyle={styles.productList}
             data={(displayProductsM.length && displayProductsM) || productsM}
             numColumns={2}
-            renderItem={renderProductItem}
+            renderItem={renderProductItemM}
           />
         </Tab>
       </TabView>

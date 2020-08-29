@@ -48,7 +48,6 @@ export const LaporanScreen = ({navigation}) => {
         for (var i = 0; i < len; i++) {
           var row = results.rows.item(i);
           data.push(row);
-          console.log(row);
         }
         setRecord(data);
       });
@@ -123,12 +122,12 @@ export const LaporanScreen = ({navigation}) => {
           <hr style="border-top: 2px solid #db0a5b;" />
         </div>
         <h2 style="font-weight: bold;">
-          Laporan Penjualan Tanggal :
+          Laporan Penjualan
           <sup
             class="badge badge-pill badge-info"
             style="font-weight: 300 !important;"
           >
-            13 Agustus 2020 - 13 Agustus 2021</sup
+            15 Juli 2020 - 16 Juli 2020</sup
           >
         </h2>
         <table cellpadding="5" style="width: 100%">
@@ -144,17 +143,60 @@ export const LaporanScreen = ({navigation}) => {
           </thead>
           <tbody>
             <tr style="text-align: center;">
+              <td>6</td>
+              <td>15-06-2020</td>
+              <td>Shoyu Ramen</td>
               <td>1</td>
-              <td>16-07-2020</td>
-              <td>Ramen</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>7</td>
+              <td>15-06-2020</td>
+              <td>Ocha</td>
+              <td>1</td>
+              <td>5000</td>
+              <td>5000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>8</td>
+              <td>15-06-2020</td>
+              <td>Kare Rice</td>
+              <td>1</td>
+              <td>32000</td>
+              <td>32000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>9</td>
+              <td>16-06-2020</td>
+              <td>Spicy Ramen</td>
               <td>2</td>
               <td>30000</td>
               <td>60000</td>
             </tr>
+            <tr style="text-align: center;">
+              <td>10</td>
+              <td>16-06-2020</td>
+              <td>Ocha</td>
+              <td>2</td>
+              <td>5000</td>
+              <td>10000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>TOTAL :</td>
+              <td>137000</td>
+            </tr>
           </tbody>
         </table>
         <div style="text-align: right; margin-top: 25px; margin-right: 50px;">
-          Depok, 16 July 2020
+          Depok, 20 Juli 2020
+        </div>
+        <div style="text-align: right; margin-top: 100px; margin-right: 85px;">
+          Andrew
         </div>
       </body>
     </html>`,
@@ -225,12 +267,12 @@ export const LaporanScreen = ({navigation}) => {
           <hr style="border-top: 2px solid #db0a5b;" />
         </div>
         <h2 style="font-weight: bold;">
-          Laporan Penjualan Mingguan Per-tanggal :
+          Laporan Penjualan
           <sup
             class="badge badge-pill badge-info"
             style="font-weight: 300 !important;"
           >
-            13 Agustus 2020 - 13 Agustus 2021</sup
+            13 Juli 2020 - 19 Juli 2020</sup
           >
         </h2>
         <table cellpadding="5" style="width: 100%">
@@ -246,17 +288,84 @@ export const LaporanScreen = ({navigation}) => {
           </thead>
           <tbody>
             <tr style="text-align: center;">
+              <td>5</td>
+              <td>13-06-2020</td>
+              <td>Okonomiyaki</td>
               <td>1</td>
-              <td>16-07-2020</td>
-              <td>Ramen</td>
+              <td>20000</td>
+              <td>20000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>6</td>
+              <td>15-06-2020</td>
+              <td>Shoyu Ramen</td>
+              <td>1</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>7</td>
+              <td>15-06-2020</td>
+              <td>Ocha</td>
+              <td>1</td>
+              <td>5000</td>
+              <td>5000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>8</td>
+              <td>15-06-2020</td>
+              <td>Kare Rice</td>
+              <td>1</td>
+              <td>32000</td>
+              <td>32000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>9</td>
+              <td>16-06-2020</td>
+              <td>Spicy Ramen</td>
               <td>2</td>
               <td>30000</td>
               <td>60000</td>
             </tr>
+            <tr style="text-align: center;">
+              <td>10</td>
+              <td>16-06-2020</td>
+              <td>Ocha</td>
+              <td>2</td>
+              <td>5000</td>
+              <td>10000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>11</td>
+              <td>18-06-2020</td>
+              <td>Beef Udon</td>
+              <td>1</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>12</td>
+              <td>19-06-2020</td>
+              <td>Miso Ramen</td>
+              <td>1</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>TOTAL :</td>
+              <td>217000</td>
+            </tr>
           </tbody>
         </table>
         <div style="text-align: right; margin-top: 25px; margin-right: 50px;">
-          Depok, 16 July 2020
+          Depok, 20 Juli 2020
+        </div>
+        <div style="text-align: right; margin-top: 100px; margin-right: 85px;">
+          Andrew
         </div>
       </body>
     </html>`,
@@ -327,12 +436,12 @@ export const LaporanScreen = ({navigation}) => {
           <hr style="border-top: 2px solid #db0a5b;" />
         </div>
         <h2 style="font-weight: bold;">
-          Laporan Penjualan Bulan :
+          Laporan Penjualan
           <sup
             class="badge badge-pill badge-info"
             style="font-weight: 300 !important;"
           >
-            13 Agustus 2020 - 13 Agustus 2021</sup
+            1 Juli 2020 - 31 Juli 2020</sup
           >
         </h2>
         <table cellpadding="5" style="width: 100%">
@@ -349,16 +458,115 @@ export const LaporanScreen = ({navigation}) => {
           <tbody>
             <tr style="text-align: center;">
               <td>1</td>
-              <td>16-07-2020</td>
-              <td>Ramen</td>
+              <td>01-06-2020</td>
+              <td>Spicy Ramen</td>
+              <td>1</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>2</td>
+              <td>01-06-2020</td>
+              <td>Beef Ramen</td>
+              <td>1</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>3</td>
+              <td>01-06-2020</td>
+              <td>Coca-Cola</td>
+              <td>1</td>
+              <td>7000</td>
+              <td>7000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>4</td>
+              <td>01-06-2020</td>
+              <td>Air Mineral</td>
+              <td>1</td>
+              <td>4000</td>
+              <td>4000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>5</td>
+              <td>13-06-2020</td>
+              <td>Okonomiyaki</td>
+              <td>1</td>
+              <td>20000</td>
+              <td>20000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>6</td>
+              <td>15-06-2020</td>
+              <td>Shoyu Ramen</td>
+              <td>1</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>7</td>
+              <td>15-06-2020</td>
+              <td>Ocha</td>
+              <td>1</td>
+              <td>5000</td>
+              <td>5000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>8</td>
+              <td>15-06-2020</td>
+              <td>Kare Rice</td>
+              <td>1</td>
+              <td>32000</td>
+              <td>32000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>9</td>
+              <td>16-06-2020</td>
+              <td>Spicy Ramen</td>
               <td>2</td>
               <td>30000</td>
               <td>60000</td>
             </tr>
+            <tr style="text-align: center;">
+              <td>10</td>
+              <td>16-06-2020</td>
+              <td>Ocha</td>
+              <td>2</td>
+              <td>5000</td>
+              <td>10000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>11</td>
+              <td>18-06-2020</td>
+              <td>Beef Udon</td>
+              <td>1</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td>12</td>
+              <td>19-06-2020</td>
+              <td>Miso Ramen</td>
+              <td>1</td>
+              <td>30000</td>
+              <td>30000</td>
+            </tr>
+            <tr style="text-align: center;">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>TOTAL :</td>
+              <td>288000</td>
+            </tr>
           </tbody>
         </table>
         <div style="text-align: right; margin-top: 25px; margin-right: 50px;">
-          Depok, 16 July 2020
+          Depok, 20 Juli 2020
+        </div>
+        <div style="text-align: right; margin-top: 100px; margin-right: 85px;">
+          Andrew
         </div>
       </body>
     </html>`,
