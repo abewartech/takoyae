@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
 import {
   SafeAreaView,
-  ImageBackground,
-  Dimensions,
   StyleSheet,
 } from 'react-native';
 import {
@@ -22,11 +20,13 @@ import {CartItem} from './extra/cart-item.component';
 import RNPrint from 'react-native-print';
 import moment from 'moment';
 import './global';
+import {inject, observer} from 'mobx-react';
 let SQLite = require('react-native-sqlite-storage');
 
 const BackIcon = props => <Icon {...props} name="arrow-back" />;
 
-export const DetailsScreen = ({navigation}) => {
+
+export const DetailsScreen = inject("rootStore")(observer(({navigation}) => {
   const [products, setProducts] = React.useState([]);
   const [dataBeli, setDataBeli] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -80,6 +80,7 @@ export const DetailsScreen = ({navigation}) => {
           }
         }
         setProducts(data);
+        // console.log(this.props.rootStore.bayarStore.printData);
         setDataBeli(dataFix);
         setTotal(totalFix);
         setLoading(false)
@@ -240,27 +241,29 @@ export const DetailsScreen = ({navigation}) => {
         accessoryLeft={BackAction}
       />
       <Divider />
+      {loading ? 
+( <Layout style={styles.spinnerStyle} ><Spinner  /></Layout>)
+
+: (
       <Layout style={styles.container} level="2">
-        {loading ? 
-(<Spinner  />)
-        : (
           <List
             data={products}
             renderItem={renderProductItem}
             ListFooterComponent={renderFooter}
-          />)}
+          />
         <Button
           style={styles.checkoutButton}
           size="giant"
           onPress={() => {
-            printHTML();
+            navigation.navigate('Print');
           }}>
           BAYAR
         </Button>
       </Layout>
+      )}
     </SafeAreaView>
   );
-};
+}));
 
 const styles = StyleSheet.create({
   container: {
@@ -281,7 +284,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginVertical: 24,
   },
-  spinner:  {
-    marginVertical: 10,
-  }
+  spinnerStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems:'center'
+}
 });
