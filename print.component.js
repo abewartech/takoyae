@@ -50,6 +50,7 @@ export const PrintScreen = ({navigation}) => {
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM beli', [], (tx, results) => {
         var len = results.rows.length;
+        let dataProduct = [];
         let data = [];
         let dataFix = [];
         let totalFix = 0;
@@ -63,6 +64,13 @@ export const PrintScreen = ({navigation}) => {
               <td>${row.price}</td>
             </tr>`,
           );
+          dataProduct.push({
+            title : row.name,
+            category : 'Makanan',
+            image : 'a',
+            price : row.price,
+            amount : row.amount
+          })
           if (row.name === 'Shoyu Ramen') {
             data.push(Product.makanan1());
           } else if (row.name === 'Spicy Ramen') {
@@ -87,7 +95,7 @@ export const PrintScreen = ({navigation}) => {
             data.push(ProductM.minuman3());
           }
         }
-        setProducts(data);
+        setProducts(dataProduct);
         setTotal(totalFix);
         setDataBeli(dataFix);
         setLoading(false);
