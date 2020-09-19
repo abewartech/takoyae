@@ -1,8 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  SafeAreaView,
-  BackHandler 
-} from 'react-native';
+import {SafeAreaView, BackHandler} from 'react-native';
 import {
   Divider,
   Icon,
@@ -10,7 +7,7 @@ import {
   TopNavigation,
   TopNavigationAction,
   Spinner,
-  Text
+  Text,
 } from '@ui-kitten/components';
 import {Product} from './data';
 import {ProductM} from './dataM';
@@ -36,12 +33,15 @@ export const PrintScreen = ({navigation}) => {
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
     return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
     };
   }, []);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     var db = SQLite.openDatabase({
       name: 'beli.db',
       createFromLocation: '~takoyae.db',
@@ -90,17 +90,16 @@ export const PrintScreen = ({navigation}) => {
         setProducts(data);
         setTotal(totalFix);
         setDataBeli(dataFix);
-        setLoading(false)
+        setLoading(false);
       });
     });
-  },[]);
+  }, []);
 
   useEffect(() => {
-    if(dataBeli.length > 0) {
-      once === 0 ? printHTML() : null
-    }
-    else {
-      setLoading(true)
+    if (dataBeli.length > 0) {
+      once === 0 ? printHTML() : null;
+    } else {
+      setLoading(true);
     }
   });
 
@@ -112,9 +111,8 @@ export const PrintScreen = ({navigation}) => {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
 
-
   async function printHTML() {
-    setOnce(1)
+    setOnce(1);
     await RNPrint.print({
       html: `<html>
       <head>
@@ -202,7 +200,7 @@ export const PrintScreen = ({navigation}) => {
       null,
       null,
     );
-  }
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -212,11 +210,17 @@ export const PrintScreen = ({navigation}) => {
         accessoryLeft={BackAction}
       />
       <Divider />
-      {loading ? (<Layout style={{flex: 1,
-    justifyContent: 'center',
-    alignItems:'center'}} ><Spinner></Spinner></Layout>) : <Layout style={{flex: 1,
-      justifyContent: 'center',
-      alignItems:'center'}} ><Text>Terimakasih</Text></Layout>}
+      {loading ? (
+        <Layout
+          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Spinner />
+        </Layout>
+      ) : (
+        <Layout
+          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>Terimakasih</Text>
+        </Layout>
+      )}
     </SafeAreaView>
   );
 };
