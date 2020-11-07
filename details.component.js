@@ -11,6 +11,7 @@ import {
   Button,
   Spinner,
 } from '@ui-kitten/components';
+import Sound from 'react-native-sound';
 import {Product} from './data';
 import {ProductM} from './dataM';
 import {CartItem} from './extra/cart-item.component';
@@ -19,6 +20,11 @@ import moment from 'moment';
 import './global';
 import {inject, observer} from 'mobx-react';
 let SQLite = require('react-native-sqlite-storage');
+
+
+const terimakasih = new Sound(
+  require('./assets/audio/terimakasih.mp4'),
+);
 
 const BackIcon = props => <Icon {...props} name="arrow-back" />;
 
@@ -253,6 +259,7 @@ export const DetailsScreen = inject('rootStore')(
               style={styles.checkoutButton}
               size="giant"
               onPress={() => {
+                terimakasih.play();
                 navigation.navigate('Print');
               }}>
               BAYAR

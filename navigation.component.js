@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from './home.component';
+import {SplashScreen} from './splash.component';
 import {DetailsScreen} from './details.component';
 import {LaporanScreen} from './laporan.component';
 import {PrintScreen} from './print.component';
@@ -13,7 +14,8 @@ import {PendapatanScreen} from './pendapatan.component';
 const {Navigator, Screen} = createStackNavigator();
 
 const HomeNavigator = () => (
-  <Navigator headerMode="none" initialRouteName="Home">
+  <Navigator headerMode="none" initialRouteName="Splash">
+    <Screen name="Splash" component={SplashScreen} />
     <Screen name="Home" component={HomeScreen} />
     <Screen name="Details" component={DetailsScreen} />
     <Screen name="Laporan" component={LaporanScreen} />
