@@ -149,6 +149,7 @@ export const MingguanScreen = ({navigation}) => {
       <body>
         <div style="width: 100%; text-align: center;">
           <h1 style="background-color: #db0a5b; color: #fff; padding: 20px;">
+          <img src="assets/images/logo.png;base64,${imgData}" width="90" height="100" align=left>
             Takoyae Ramen
           </h1>
           <h5 style="color: #db0a5b;">

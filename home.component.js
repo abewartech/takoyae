@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   ImageBackground,
@@ -18,8 +18,8 @@ import {
   Card,
   Text,
 } from '@ui-kitten/components';
-import {Product} from './data';
-import {ProductM} from './dataM';
+import { Product } from './data';
+import { ProductM } from './dataM';
 import './global';
 let SQLite = require('react-native-sqlite-storage');
 
@@ -40,7 +40,7 @@ const productsM: ProductM[] = [
   ProductM.minuman3(),
 ];
 
-export const HomeScreen = ({navigation, route}) => {
+export const HomeScreen = ({ navigation, route }) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [record, setRecord] = React.useState([]);
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -94,83 +94,83 @@ export const HomeScreen = ({navigation, route}) => {
   const renderItemFooter = (
     info: ListRenderItemInfo<Product>,
   ): React.ReactElement => (
-    <Layout style={styles.itemFooter}>
-      <Text category="s1">{info.item.formattedPrice}</Text>
-      <Button
-        style={styles.iconButton}
-        size="small"
-        accessoryLeft={CartIcon}
-        onPress={() => {
-          navigateDetails(info.item);
-        }}
-      />
-    </Layout>
-  );
+      <Layout style={styles.itemFooter}>
+        <Text category="s1">{info.item.formattedPrice}</Text>
+        <Button
+          style={styles.iconButton}
+          size="small"
+          accessoryLeft={CartIcon}
+          onPress={() => {
+            navigateDetails(info.item);
+          }}
+        />
+      </Layout>
+    );
 
   const renderItemFooterM = (
     info: ListRenderItemInfo<ProductM>,
   ): React.ReactElement => (
-    <Layout style={styles.itemFooter}>
-      <Text category="s1">{info.item.formattedPrice}</Text>
-      <Button
-        style={styles.iconButton}
-        size="small"
-        accessoryLeft={CartIcon}
-        onPress={() => {
-          navigateDetails(info.item);
-        }}
-      />
-    </Layout>
-  );
+      <Layout style={styles.itemFooter}>
+        <Text category="s1">{info.item.formattedPrice}</Text>
+        <Button
+          style={styles.iconButton}
+          size="small"
+          accessoryLeft={CartIcon}
+          onPress={() => {
+            navigateDetails(info.item);
+          }}
+        />
+      </Layout>
+    );
 
   const renderItemHeader = (
     info: ListRenderItemInfo<Product>,
   ): React.ReactElement => (
-    <ImageBackground style={styles.itemHeader} source={info.item.image} />
-  );
+      <ImageBackground style={styles.itemHeader} source={info.item.image} />
+    );
 
   const renderItemHeaderM = (
     info: ListRenderItemInfo<ProductM>,
   ): React.ReactElement => (
-    <ImageBackground style={styles.itemHeader} source={info.item.image} />
-  );
+      <ImageBackground style={styles.itemHeader} source={info.item.image} />
+    );
 
   const renderProductItem = (
     info: ListRenderItemInfo<Product>,
   ): React.ReactElement => (
-    <Card
-      style={styles.productItem}
-      header={() => renderItemHeader(info)}
-      footer={() => renderItemFooter(info)}
-      onPress={() => {
-        navigateDetails(info.item);
-      }}>
-      <Text category="s1">{info.item.title}</Text>
-      <Text appearance="hint" category="c1">
-        {info.item.category}
-      </Text>
-    </Card>
-  );
+      <Card
+        style={styles.productItem}
+        header={() => renderItemHeader(info)}
+        footer={() => renderItemFooter(info)}
+        onPress={() => {
+          navigateDetails(info.item);
+        }}>
+        <Text category="s1">{info.item.title}</Text>
+        <Text appearance="hint" category="c1">
+          {info.item.category}
+        </Text>
+      </Card>
+    );
 
   const renderProductItemM = (
     info: ListRenderItemInfo<ProductM>,
   ): React.ReactElement => (
-    <Card
-      style={styles.productItem}
-      header={() => renderItemHeaderM(info)}
-      footer={() => renderItemFooterM(info)}
-      onPress={() => {
-        navigateDetails(info.item);
-      }}>
-      <Text category="s1">{info.item.title}</Text>
-      <Text appearance="hint" category="c1">
-        {info.item.category}
-      </Text>
-    </Card>
-  );
+      <Card
+        style={styles.productItem}
+        header={() => renderItemHeaderM(info)}
+        footer={() => renderItemFooterM(info)}
+        onPress={() => {
+          navigateDetails(info.item);
+        }}>
+        <Text category="s1">{info.item.title}</Text>
+        <Text appearance="hint" category="c1">
+          {info.item.category}
+        </Text>
+      </Card>
+    );
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <TopNavigation
         title="Takoyae"
         alignment="center"
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     width: 20,
     marginVertical: 10,
   },
-  mainSection: {width: 20},
+  mainSection: { width: 20 },
   section: {
     flexDirection: 'row',
     justifyContent: 'space-between',

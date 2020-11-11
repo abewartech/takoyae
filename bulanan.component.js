@@ -14,7 +14,7 @@ import {ProductM} from './dataM';
 import RNPrint from 'react-native-print';
 import moment from 'moment';
 import './global';
-import { dateTo } from './global';
+import {dateTo} from './global';
 let SQLite = require('react-native-sqlite-storage');
 
 const BackIcon = props => <Icon {...props} name="arrow-back" />;
@@ -49,15 +49,18 @@ export const BulananScreen = ({navigation}) => {
       location: 'Library',
     });
     db.transaction(tx => {
-      tx.executeSql(`SELECT * FROM penjualan WHERE tgl BETWEEN '${moment()
-        .subtract(1, 'months')
-        .format('YYYY-MM-DD')}' AND '${moment().format('YYYY-MM-DD')}'`, [], (tx, results) => {
-        var len = results.rows.length;
-        let dataFix = [];
-        for (var i = 0; i < len; i++) {
-          var row = results.rows.item(i);
-          dataFix.push(
-            `<tr style="text-align:center">
+      tx.executeSql(
+        `SELECT * FROM penjualan WHERE tgl BETWEEN '${moment()
+          .subtract(1, 'months')
+          .format('YYYY-MM-DD')}' AND '${moment().format('YYYY-MM-DD')}'`,
+        [],
+        (tx, results) => {
+          var len = results.rows.length;
+          let dataFix = [];
+          for (var i = 0; i < len; i++) {
+            var row = results.rows.item(i);
+            dataFix.push(
+              `<tr style="text-align:center">
               <td>${row.id}</td>
               <td>${row.tgl}</td>
               <td>${row.name}</td>
@@ -65,11 +68,12 @@ export const BulananScreen = ({navigation}) => {
               <td>${row.harga}</td>
               <td>${row.total}</td>
             </tr>`,
-          );
-        }
-        setDataBeli(dataFix);
-        setLoading(false);
-      });
+            );
+          }
+          setDataBeli(dataFix);
+          setLoading(false);
+        },
+      );
     });
   }, []);
 
@@ -145,6 +149,7 @@ export const BulananScreen = ({navigation}) => {
       <body>
         <div style="width: 100%; text-align: center;">
           <h1 style="background-color: #db0a5b; color: #fff; padding: 20px;">
+          <img src="assets/images/logo.png;base64,${imgData}" width="90" height="100" align=left>
             Takoyae Ramen
           </h1>
           <h5 style="color: #db0a5b;">
@@ -159,7 +164,9 @@ export const BulananScreen = ({navigation}) => {
             class="badge badge-pill badge-info"
             style="font-weight: 300 !important;"
           >
-          ${moment().subtract(1, 'months').format('DD MMMM YYYY')} - ${moment().format('DD MMMM YYYY')}</sup
+          ${moment()
+            .subtract(1, 'months')
+            .format('DD MMMM YYYY')} - ${moment().format('DD MMMM YYYY')}</sup
           >
         </h2>
         <table cellpadding="5" style="width: 100%">
