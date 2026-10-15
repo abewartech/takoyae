@@ -3,5 +3,5 @@ module.exports = global.config = {
   amount: 1,
   price: 15000,
   date: null,
-  dateTo: null
+  dateTo: null,
 };

@@ -9,11 +9,11 @@ import {AppNavigator} from './navigation.component';
 const rootStore = new RootStore();
 export default () => (
   <>
-  <Provider rootStore={rootStore}>
-  <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <AppNavigator />
-    </ApplicationProvider>
-  </Provider>
+    <Provider rootStore={rootStore}>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <AppNavigator />
+      </ApplicationProvider>
+    </Provider>
   </>
 );
