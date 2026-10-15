@@ -7,10 +7,9 @@ export class Bayar {
   }
 
   bayar(data) {
-    console.log(data)
-      this.printData = data;
+    console.log(data);
+    this.printData = data;
   }
-
 }
 
 decorate(Bayar, {});

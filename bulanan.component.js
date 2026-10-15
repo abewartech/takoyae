@@ -26,10 +26,10 @@ export const BulananScreen = ({navigation}) => {
   const [once, setOnce] = React.useState(0);
   const [total, setTotal] = React.useState(0);
 
-  function handleBackButtonClick() {
+  const handleBackButtonClick = React.useCallback(() => {
     navigation.navigate('Laporan');
     return true;
-  }
+  }, [navigation]);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -39,7 +39,7 @@ export const BulananScreen = ({navigation}) => {
         handleBackButtonClick,
       );
     };
-  }, []);
+  }, [handleBackButtonClick]);
 
   useEffect(() => {
     setLoading(true);
@@ -83,7 +83,7 @@ export const BulananScreen = ({navigation}) => {
     } else {
       setLoading(true);
     }
-  });
+  }, [dataBeli.length, once, printHTML]);
 
   const navigateBack = () => {
     navigation.navigate('Laporan');
@@ -93,7 +93,7 @@ export const BulananScreen = ({navigation}) => {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
 
-  async function printHTML() {
+  const printHTML = React.useCallback(async () => {
     setOnce(1);
     await RNPrint.print({
       html: `<html>
@@ -193,8 +193,7 @@ export const BulananScreen = ({navigation}) => {
       </body>
     </html>`,
     });
-  }
-
+  }, [dataBeli]);
   return (
     <SafeAreaView style={{flex: 1}}>
       <TopNavigation

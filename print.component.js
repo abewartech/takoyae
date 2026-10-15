@@ -25,10 +25,10 @@ export const PrintScreen = ({navigation}) => {
   const [once, setOnce] = React.useState(0);
   const [total, setTotal] = React.useState(0);
 
-  function handleBackButtonClick() {
+  const handleBackButtonClick = React.useCallback(() => {
     navigation.navigate('Home');
     return true;
-  }
+  }, [navigation]);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -38,7 +38,7 @@ export const PrintScreen = ({navigation}) => {
         handleBackButtonClick,
       );
     };
-  }, []);
+  }, [handleBackButtonClick]);
 
   useEffect(() => {
     setLoading(true);
@@ -65,12 +65,12 @@ export const PrintScreen = ({navigation}) => {
             </tr>`,
           );
           dataProduct.push({
-            title : row.name,
-            category : 'Makanan',
-            image : 'a',
-            price : row.price,
-            amount : row.amount
-          })
+            title: row.name,
+            category: 'Makanan',
+            image: 'a',
+            price: row.price,
+            amount: row.amount,
+          });
           if (row.name === 'Shoyu Ramen') {
             data.push(Product.makanan1());
           } else if (row.name === 'Spicy Ramen') {
@@ -109,7 +109,7 @@ export const PrintScreen = ({navigation}) => {
     } else {
       setLoading(true);
     }
-  });
+  }, [dataBeli.length, once, printHTML]);
 
   const navigateBack = () => {
     navigation.navigate('Home');
@@ -119,7 +119,22 @@ export const PrintScreen = ({navigation}) => {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
 
-  async function printHTML() {
+  const deleteAll = React.useCallback(() => {
+    var db = SQLite.openDatabase({
+      name: 'beli.db',
+      createFromLocation: '~takoyae.db',
+      location: 'Library',
+    });
+    db.transaction(
+      tx => {
+        tx.executeSql('delete from beli;');
+      },
+      null,
+      null,
+    );
+  }, []);
+
+  const printHTML = React.useCallback(async () => {
     setOnce(1);
     await RNPrint.print({
       html: `<html>
@@ -193,22 +208,7 @@ export const PrintScreen = ({navigation}) => {
         deleteAll(),
       );
     });
-  }
-
-  const deleteAll = () => {
-    var db = SQLite.openDatabase({
-      name: 'beli.db',
-      createFromLocation: '~takoyae.db',
-      location: 'Library',
-    });
-    db.transaction(
-      tx => {
-        tx.executeSql(`delete from beli;`);
-      },
-      null,
-      null,
-    );
-  };
+  }, [dataBeli, total, products, deleteAll]);
 
   return (
     <SafeAreaView style={{flex: 1}}>

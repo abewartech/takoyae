@@ -21,10 +21,7 @@ import './global';
 import {inject, observer} from 'mobx-react';
 let SQLite = require('react-native-sqlite-storage');
 
-
-const terimakasih = new Sound(
-  require('./assets/audio/terimakasih.mp4'),
-);
+const terimakasih = new Sound(require('./assets/audio/terimakasih.mp4'));
 
 const BackIcon = props => <Icon {...props} name="arrow-back" />;
 
@@ -119,7 +116,7 @@ export const DetailsScreen = inject('rootStore')(
       });
       db.transaction(
         tx => {
-          tx.executeSql(`delete from beli where name = ?;`, [product.title]);
+          tx.executeSql('delete from beli where name = ?;', [product.title]);
         },
         null,
         products.splice(index, 1),
@@ -229,7 +226,7 @@ export const DetailsScreen = inject('rootStore')(
       });
       db.transaction(
         tx => {
-          tx.executeSql(`delete from beli;`);
+          tx.executeSql('delete from beli;');
         },
         null,
         null,
