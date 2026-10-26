@@ -53,5 +53,11 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|webp|svg|ttf|otf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
     }
+  },
+  "overrides": {
+    "form-data": "2.5.4",
+    "json-schema": "0.4.0",
+    "shell-quote": "1.11.0",
+    "logkitty": "0.7.1"
   }
 }
